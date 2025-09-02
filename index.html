@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Raw Color Photography</title>
+  <style>
+    :root{
+      --bg:#0a0a0a;
+      --bg-2:#111;
+      --text:#d6d6d6;
+      --muted:#9a9a9a;
+      --accent:#7fd1b9; /* soft green underline like in the screenshot */
+      --max:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;}
+    a{color:inherit;text-decoration:none}
+
+    /* HEADER */
+    .site-header{
+      position: sticky; top:0; z-index: 50;
+      backdrop-filter: saturate(1.2) blur(4px);
+      background: rgba(10,10,10,0.85);
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .header-wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 16px 20px;
+    }
+    .brand{
+      font-size: clamp(18px, 2.3vw, 28px);
+      font-weight: 600;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+    nav ul{
+      display:flex; gap: 22px; list-style:none; margin:0; padding:0;
+      align-items:center;
+    }
+    nav a{
+      color: var(--muted);
+      font-size: 14px; letter-spacing:.4px;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+      transition: color .15s ease, border-color .15s ease;
+    }
+    nav a:hover{ color: var(--text)}
+    nav a.active{ color: var(--text); border-bottom-color: var(--accent); }
+
+    .icon{
+      display:inline-flex; width:18px; height:18px; vertical-align:middle; opacity:.9;
+    }
+    .icon:hover{ opacity:1 }
+
+    /* PAGE SECTIONS */
+    .section{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 48px 20px 56px;
+    }
+    .section h2{
+      margin: 0 0 18px;
+      font-weight:600; letter-spacing:.3px;
+      font-size: 18px; color:#e5e5e5;
+    }
+
+    /* GALLERY GRID */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 14px;
+    }
+    .card{
+      background: var(--bg-2);
+      border: 1px solid #1a1a1a;
+      border-radius: 10px;
+      overflow:hidden;
+    }
+    .card img{
+      display:block; width:100%; height:auto; aspect-ratio: 4/5; object-fit: cover;
+      transition: transform .25s ease;
+    }
+    .card:hover img{ transform: scale(1.02) }
+
+    /* FOOTER */
+    footer{
+      border-top:1px solid #1e1e1e;
+      color:var(--muted);
+      text-align:center;
+      padding:24px 16px 40px;
+      font-size:13px;
+    }
+
+    /* SMALL SCREENS */
+    @media (max-width: 720px){
+      nav ul{ gap:14px }
+      .section{ padding-top:36px }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="header-wrap">
+      <div class="brand">Raw Color Photography</div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#portrait" data-link>Portrait</a></li>
+          <li><a href="#food" data-link>Food</a></li>
+          <li><a href="#nude" data-link>Nude</a></li>
+          <li><a href="#contact" data-link>Contacts</a></li>
+          <li>
+            <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+              <!-- Minimal Instagram glyph (SVG) -->
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PORTRAIT -->
+  <section id="portrait" class="section" tabindex="-1">
+    <h2>Portrait</h2>
+    <div class="gallery">
+      <!-- Replace these with your files: /portrait/... -->
+      <figure class="card"><img src="portrait/photo1.jpg" alt="Portrait 1"></figure>
+      <figure class="card"><img src="portrait/photo2.jpg" alt="Portrait 2"></figure>
+      <figure class="card"><img src="portrait/photo3.jpg" alt="Portrait 3"></figure>
+    </div>
+  </section>
+
+  <!-- FOOD -->
+  <section id="food" class="section" tabindex="-1">
+    <h2>Food</h2>
+    <div class="gallery">
+      <!-- Replace with /food/... -->
+      <figure class="card"><img src="food/food1.jpg" alt="Food 1"></figure>
+      <figure class="card"><img src="food/food2.jpg" alt="Food 2"></figure>
+      <figure class="card"><img src="food/food3.jpg" alt="Food 3"></figure>
+    </div>
+  </section>
+
+  <!-- NUDE -->
+  <section id="nude" class="section" tabindex="-1">
+    <h2>Nude</h2>
+    <div class="gallery">
+      <!-- Replace with /nude/... -->
+      <figure class="card"><img src="nude/nude1.jpg" alt="Nude 1"></figure>
+      <figure class="card"><img src="nude/nude2.jpg" alt="Nude 2"></figure>
+      <figure class="card"><img src="nude/nude3.jpg" alt="Nude 3"></figure>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section" tabindex="-1">
+    <h2>Contacts</h2>
+    <p style="color:var(--muted);max-width:700px;line-height:1.7">
+      For inquiries, collaborations, or prints:
+      <a href="mailto:hello@example.com" style="text-decoration:underline">hello@example.com</a>
+    </p>
+  </section>
+
+  <footer>
+    &copy; <span id="y"></span> Raw Color Photography
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Smooth scroll + active nav state
+    const links = [...document.querySelectorAll('a[data-link]')];
+    links.forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        if(id.startsWith('#')){
+          e.preventDefault();
+          document.querySelector(id)?.scrollIntoView({behavior:'smooth', block:'start'});
+          history.replaceState(null,'',id);
+        }
+      });
+    });
+
+    // Observe sections to toggle active underline like the screenshot
+    const map = new Map(links.map(a=>[a.getAttribute('href'), a]));
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const id = '#'+entry.target.id;
+        const link = map.get(id);
+        if(!link) return;
+        if(entry.isIntersecting){
+          links.forEach(l=>l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    }, {rootMargin:'-40% 0px -50% 0px', threshold:0});
+
+    document.querySelectorAll('.section').forEach(s=>io.observe(s));
+    // If page loads with a hash, mark it active
+    const init = map.get(location.hash); if(init){ links.forEach(l=>l.classList.remove('active')); init.classList.add('active'); }
+    else { links[0]?.classList.add('active'); }
+  </script>
+</body>
+</html>
