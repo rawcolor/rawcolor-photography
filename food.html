@@ -16,14 +16,16 @@
     nav a{color:var(--muted);font-size:14px;letter-spacing:.4px;padding:6px 0;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
     nav a:hover{color:var(--text)} nav a.active{color:var(--text);border-bottom-color:var(--accent)}
     .icon{display:inline-flex;width:18px;height:18px;vertical-align:middle;opacity:.9}
-    .section{max-width:var(--max);margin:0 auto;padding:48px 20px 56px}
-    .section h2{margin:0 0 18px;font-weight:600;letter-spacing:.3px;font-size:18px;color:#e5e5e5}
-    .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
-    .card{background:var(--bg-2);border:1px solid #1a1a1a;border-radius:10px;overflow:hidden}
-    .card img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;transition:transform .25s}
-    .card:hover img{transform:scale(1.02)}
+    .section{max-width:var(--max);margin:0 auto;padding:28px 20px 56px}
+    .section h2{margin:10px 0 18px;font-weight:600;letter-spacing:.3px;font-size:18px;color:#e5e5e5}
+    .masonry{column-gap:14px}
+    @media (min-width:480px){ .masonry{ column-count:2 } }
+    @media (min-width:900px){ .masonry{ column-count:3 } }
+    @media (min-width:1200px){ .masonry{ column-count:4 } }
+    .tile{break-inside:avoid;margin:0 0 14px;display:block;background:var(--bg-2);border:1px solid #1a1a1a;border-radius:10px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.25);transition:transform .2s}
+    .tile:hover{transform:translateY(-2px)}
+    .tile img{display:block;width:100%;height:auto}
     footer{border-top:1px solid #1e1e1e;color:var(--muted);text-align:center;padding:24px 16px 40px;font-size:13px}
-    @media (max-width:720px){nav ul{gap:14px}.section{padding-top:36px}}
   </style>
 </head>
 <body>
@@ -52,27 +54,27 @@
 
   <section class="section">
     <h2>Food</h2>
-    <div id="grid" class="gallery"></div>
+    <div id="grid" class="masonry"></div>
   </section>
 
   <footer>&copy; <span id="y"></span> Raw Color Photography</footer>
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
-
     const files = [
       "3 eggs in a basket ---Food.jpg",
       "Japanese Rice---Food.jpg",
       "Japanese food Tempura---Food.jpg"
     ];
-
+    function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]] } return a }
     function niceAlt(n){return n.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' ').replace(/\s+/g,' ').trim();}
     const root = document.getElementById('grid');
-    files.forEach(name=>{
-      const url = "food/" + encodeURIComponent(name);
-      const fig = document.createElement('figure'); fig.className='card';
-      const img = document.createElement('img'); img.loading='lazy'; img.decoding='async'; img.alt=niceAlt(name); img.src=url;
-      fig.appendChild(img); root.appendChild(fig);
+    shuffle(files).forEach(name=>{
+      const a = document.createElement('a'); a.className='tile';
+      a.href = "food/" + encodeURIComponent(name); a.target="_blank";
+      const img = document.createElement('img'); img.loading='lazy'; img.decoding='async'; img.alt=niceAlt(name);
+      img.src = "food/" + encodeURIComponent(name);
+      a.appendChild(img); root.appendChild(a);
     });
   </script>
 </body>
