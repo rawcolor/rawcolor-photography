@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Raw Color Photography – Portrait</title>
+  <title>Raw Color Photography – Food</title>
   <style>
     :root{--bg:#0a0a0a;--bg-2:#111;--text:#d6d6d6;--muted:#9a9a9a;--accent:#7fd1b9;--max:1200px}
     *{box-sizing:border-box}
@@ -32,8 +32,8 @@
       <div class="brand">Raw Color Photography</div>
       <nav aria-label="Primary">
         <ul>
-          <li><a href="index.html" class="active">Portrait</a></li>
-          <li><a href="food.html">Food</a></li>
+          <li><a href="index.html">Portrait</a></li>
+          <li><a href="food.html" class="active">Food</a></li>
           <li><a href="nude.html">Nude</a></li>
           <li><a href="mailto:hello@example.com">Contacts</a></li>
           <li>
@@ -51,7 +51,7 @@
   </header>
 
   <section class="section">
-    <h2>Portrait</h2>
+    <h2>Food</h2>
     <div id="grid" class="gallery"></div>
   </section>
 
@@ -61,40 +61,15 @@
     document.getElementById('y').textContent = new Date().getFullYear();
 
     const files = [
-      "468575439_10162548447621579_543252444946822234_n.jpg",
-      "Aerial Fabric Silk Dance Girl Back Stretch---Portrait.jpg",
-      "Bride and Groom Sitting together on Red Chair in front of Love Sign---Portrait.jpg",
-      "Bride in White Wedding Dress Sitting in front of Love Sign---Portrait.jpg",
-      "Girl Lying by the Beach face up---Portrait.jpg",
-      "Girl Pole Dance Red Top---Portrait.jpg",
-      "Girl Pole Dance upside down---Portrait.jpg",
-      "Girl in Blue Dress on Beach Log---Portrait.jpg",
-      "Girl in flowy white dress holding umbrella under cherry blossom trees---Portrait - Copy.jpg",
-      "Girl in white dread holding umbrella under cherry blossom trees---Portrait.jpg",
-      "Girl lying by the beach---Portrait.jpg",
-      "Girl pole dance---Portrait.jpg",
-      "Girl with feather on the head in white blue dress---Portrait.jpg",
-      "Indian Lady in Traditional Dress---Portrait.jpg",
-      "Just Landed in the Forest---Portrait.jpg",
-      "Silk Dance---Portrait.jpg",
-      "copy Aerial Fabric Silk Dance Back Bend---Portrait.jpg",
-      "gilr smile 3.jpg",
-      "girl smile 1.jpg",
-      "girl smile 4.jpg",
-      "girl smile 5.jpg",
-      "maternaity 1.jpg",
-      "maternity 2.jpg",
-      "pole 1.jpg",
-      "pole 2.jpg",
-      "pole 3.jpg",
-      "pole 4.jpg",
-      "pole 5.jpg"
+      "3 eggs in a basket ---Food.jpg",
+      "Japanese Rice---Food.jpg",
+      "Japanese food Tempura---Food.jpg"
     ];
 
     function niceAlt(n){return n.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' ').replace(/\s+/g,' ').trim();}
     const root = document.getElementById('grid');
     files.forEach(name=>{
-      const url = "portrait/" + encodeURIComponent(name);
+      const url = "food/" + encodeURIComponent(name);
       const fig = document.createElement('figure'); fig.className='card';
       const img = document.createElement('img'); img.loading='lazy'; img.decoding='async'; img.alt=niceAlt(name); img.src=url;
       fig.appendChild(img); root.appendChild(fig);
