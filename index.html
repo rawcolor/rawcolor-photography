@@ -22,33 +22,19 @@
     .section{max-width:var(--max);margin:0 auto;padding:28px 20px 56px}
     .section h2{margin:10px 0 18px;font-weight:600;letter-spacing:.3px;font-size:18px;color:#e5e5e5}
 
-    /* Masonry using CSS columns (keeps full image, no crop) */
-    .masonry{
-      column-gap: 14px;
-    }
-    /* Responsive column counts */
-    @media (min-width:480px){ .masonry{ column-count: 2; } }
-    @media (min-width:900px){ .masonry{ column-count: 3; } }
-    @media (min-width:1200px){ .masonry{ column-count: 4; } }
+    /* Masonry via CSS columns (preserves original image aspect ratio) */
+    .masonry{column-gap:14px}
+    @media (min-width:480px){ .masonry{ column-count:2 } }
+    @media (min-width:900px){ .masonry{ column-count:3 } }
+    @media (min-width:1200px){ .masonry{ column-count:4 } }
 
     .tile{
-      break-inside: avoid;
-      margin: 0 0 14px;
-      display: block;
-      background: var(--bg-2);
-      border: 1px solid #1a1a1a;
-      border-radius: 10px;
-      overflow: hidden;
-      /* subtle shadow */
-      box-shadow: 0 2px 6px rgba(0,0,0,.25);
-      transition: transform .2s ease;
+      break-inside:avoid;margin:0 0 14px;display:block;
+      background:var(--bg-2);border:1px solid #1a1a1a;border-radius:10px;overflow:hidden;
+      box-shadow:0 2px 6px rgba(0,0,0,.25);transition:transform .2s
     }
-    .tile:hover{ transform: translateY(-2px) }
-    .tile img{
-      display:block;
-      width:100%;   /* full width of the column */
-      height:auto;  /* keeps original aspect ratio – no cropping */
-    }
+    .tile:hover{transform:translateY(-2px)}
+    .tile img{display:block;width:100%;height:auto}
 
     footer{border-top:1px solid #1e1e1e;color:var(--muted);text-align:center;padding:24px 16px 40px;font-size:13px}
   </style>
@@ -87,52 +73,28 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Your portrait files
+    // Order preserved exactly as shown in your ls output (left→right, then next row)
     const files = [
-      "468575439_10162548447621579_543252444946822234_n.jpg",
-      "Aerial Fabric Silk Dance Girl Back Stretch---Portrait.jpg",
-      "Bride and Groom Sitting together on Red Chair in front of Love Sign---Portrait.jpg",
-      "Bride in White Wedding Dress Sitting in front of Love Sign---Portrait.jpg",
-      "Girl Lying by the Beach face up---Portrait.jpg",
-      "Girl Pole Dance Red Top---Portrait.jpg",
-      "Girl Pole Dance upside down---Portrait.jpg",
-      "Girl in Blue Dress on Beach Log---Portrait.jpg",
-      "Girl in flowy white dress holding umbrella under cherry blossom trees---Portrait - Copy.jpg",
-      "Girl in white dread holding umbrella under cherry blossom trees---Portrait.jpg",
-      "Girl lying by the beach---Portrait.jpg",
-      "Girl pole dance---Portrait.jpg",
-      "Girl with feather on the head in white blue dress---Portrait.jpg",
-      "Indian Lady in Traditional Dress---Portrait.jpg",
-      "Just Landed in the Forest---Portrait.jpg",
-      "Silk Dance---Portrait.jpg",
-      "copy Aerial Fabric Silk Dance Back Bend---Portrait.jpg",
-      "gilr smile 3.jpg",
-      "girl smile 1.jpg",
-      "girl smile 4.jpg",
-      "girl smile 5.jpg",
-      "maternaity 1.jpg",
-      "maternity 2.jpg",
-      "pole 1.jpg",
-      "pole 2.jpg",
-      "pole 3.jpg",
-      "pole 4.jpg",
-      "pole 5.jpg"
+      "468575439_10162548447621579_543252444946822234_n.jpg","Girl lying by the beach---Portrait.jpg","girl smile 4.jpg",
+      "Aerial Fabric Silk Dance Girl Back Stretch---Portrait.jpg","Girl pole dance---Portrait.jpg","girl smile 5.jpg",
+      "Bride and Groom Sitting together on Red Chair in front of Love Sign---Portrait.jpg","Girl with feather on the head in white blue dress---Portrait.jpg","maternaity 1.jpg",
+      "Bride in White Wedding Dress Sitting in front of Love Sign---Portrait.jpg","Indian Lady in Traditional Dress---Portrait.jpg","maternity 2.jpg",
+      "Girl Lying by the Beach face up---Portrait.jpg","Just Landed in the Forest---Portrait.jpg","pole 2.jpg",
+      "Girl Pole Dance Red Top---Portrait.jpg","Pole 1.jpg","pole 3.jpg",
+      "Girl Pole Dance upside down---Portrait.jpg","Silk Dance---Portrait.jpg","pole 4.jpg",
+      "Girl in Blue Dress on Beach Log---Portrait.jpg","copy Aerial Fabric Silk Dance Back Bend---Portrait.jpg","pole 5.jpg",
+      "Girl in flowy white dress holding umbrella under cherry blossom trees---Portrait - Copy.jpg","gilr smile 3.jpg",
+      "Girl in white dread holding umbrella under cherry blossom trees---Portrait.jpg","girl smile 1.jpg"
     ];
 
-    function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]] } return a }
     function niceAlt(n){return n.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' ').replace(/\s+/g,' ').trim();}
-
     const root = document.getElementById('grid');
-    shuffle(files).forEach(name=>{
-      const fig = document.createElement('a'); // clickable tile (future lightbox, if you want)
-      fig.className = 'tile';
-      fig.href = "portrait/" + encodeURIComponent(name);
-      fig.target = "_blank"; // open full-size in new tab
-      const img = document.createElement('img');
-      img.loading='lazy'; img.decoding='async'; img.alt=niceAlt(name);
+    files.forEach(name=>{
+      const a = document.createElement('a'); a.className='tile';
+      a.href = "portrait/" + encodeURIComponent(name); a.target="_blank";
+      const img = document.createElement('img'); img.loading='lazy'; img.decoding='async'; img.alt=niceAlt(name);
       img.src = "portrait/" + encodeURIComponent(name);
-      fig.appendChild(img);
-      root.appendChild(fig);
+      a.appendChild(img); root.appendChild(a);
     });
   </script>
 </body>
